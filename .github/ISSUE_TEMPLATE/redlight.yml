@@ -1,0 +1,122 @@
+name: 🔴 RedLight Issue
+description: Report a critical bug, security vulnerability, or blocking issue
+title: "[RedLight] "
+labels: ["redlight", "critical", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🔴 RedLight Issue - CRITICAL
+        This template is for CRITICAL issues that are blocking, contain security vulnerabilities, or require immediate attention.
+        
+  - type: textarea
+    id: description
+    attributes:
+      label: Critical Issue Description
+      description: Describe the critical issue
+      placeholder: What's broken or critically wrong?
+    validations:
+      required: true
+      
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity Level
+      description: How critical is this issue?
+      options:
+        - Critical - System Down
+        - Critical - Security Vulnerability
+        - Critical - Data Loss Risk
+        - High - Major Feature Broken
+        - High - Performance Degradation
+    validations:
+      required: true
+      
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: What is affected and how?
+      placeholder: |
+        - Who is affected?
+        - What systems/features are impacted?
+        - What's the scope of the damage?
+    validations:
+      required: true
+      
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Step one
+        2. Step two
+        3. Step three
+        4. Error occurs
+    validations:
+      required: true
+      
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: What's the correct behavior?
+    validations:
+      required: true
+      
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happens?
+      placeholder: What's going wrong?
+    validations:
+      required: true
+      
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Where does this occur?
+      placeholder: |
+        - OS:
+        - Browser/Runtime:
+        - Version:
+    validations:
+      required: true
+      
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Paste any relevant error logs or stack traces
+      placeholder: Error messages, stack traces, etc.
+      render: shell
+    validations:
+      required: false
+      
+  - type: textarea
+    id: immediate-action
+    attributes:
+      label: Immediate Action Required
+      description: What needs to happen right now?
+      placeholder: Immediate steps to mitigate or resolve?
+    validations:
+      required: true
+      
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Critical Issue Checklist
+      description: Confirm the following before submitting
+      options:
+        - label: This is a critical/blocking issue
+          required: true
+        - label: I have provided steps to reproduce
+          required: true
+        - label: I have described the impact clearly
+          required: true
+        - label: This requires immediate attention
+          required: true

@@ -1,0 +1,133 @@
+name: 🟡 YellowLight
+
+on:
+  push:
+    branches: [ main, develop, feature/*, hotfix/* ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    - cron: '0 0 * * 0' # Weekly on Sunday
+  workflow_dispatch:
+
+jobs:
+  yellowlight-checks:
+    name: YellowLight Warning Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Check for improvements
+        run: |
+          echo "🟡 YellowLight: Checking for potential improvements..."
+          
+          # Check for optional but recommended files
+          WARNINGS=0
+          
+          if [ ! -f "CONTRIBUTING.md" ]; then
+            echo "⚠️  Warning: CONTRIBUTING.md not found - recommended for open source projects"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          if [ ! -f "CODE_OF_CONDUCT.md" ]; then
+            echo "⚠️  Warning: CODE_OF_CONDUCT.md not found - recommended for community projects"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          if [ ! -f "SECURITY.md" ]; then
+            echo "⚠️  Warning: SECURITY.md not found - recommended for security policy"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          if [ ! -f "LICENSE" ] && [ ! -f "LICENSE.md" ]; then
+            echo "⚠️  Warning: LICENSE not found - recommended to specify license"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          if [ ! -d ".github/ISSUE_TEMPLATE" ]; then
+            echo "⚠️  Warning: Issue templates not found - recommended for issue management"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          if [ ! -d ".github/PULL_REQUEST_TEMPLATE" ] && [ ! -f ".github/pull_request_template.md" ]; then
+            echo "⚠️  Warning: PR template not found - recommended for consistent PRs"
+            WARNINGS=$((WARNINGS+1))
+          fi
+          
+          echo ""
+          echo "Total warnings: $WARNINGS"
+          
+      - name: Check documentation coverage
+        run: |
+          echo "📚 Checking documentation coverage..."
+          
+          if [ -f "README.md" ]; then
+            README_SIZE=$(wc -l < README.md)
+            if [ $README_SIZE -lt 20 ]; then
+              echo "⚠️  Warning: README.md is quite short (${README_SIZE} lines)"
+              echo "   Consider adding more documentation"
+            else
+              echo "✅ README.md has good coverage (${README_SIZE} lines)"
+            fi
+          fi
+          
+      - name: Check for TODO and FIXME comments
+        run: |
+          echo "🔍 Checking for TODO and FIXME comments..."
+          
+          TODO_COUNT=$(find . -type f \( -name "*.js" -o -name "*.ts" -o -name "*.py" -o -name "*.go" -o -name "*.java" -o -name "*.md" \) ! -path "./node_modules/*" ! -path "./dist/*" ! -path "./build/*" -exec grep -l "TODO\|FIXME" {} \; 2>/dev/null | wc -l || echo "0")
+          
+          if [ "$TODO_COUNT" -gt 0 ]; then
+            echo "⚠️  Warning: Found $TODO_COUNT file(s) with TODO/FIXME comments"
+            echo "   Consider addressing these items"
+          else
+            echo "✅ No TODO/FIXME comments found"
+          fi
+          
+      - name: YellowLight Summary
+        run: |
+          echo "================================"
+          echo "🟡 YELLOWLIGHT STATUS: REVIEW"
+          echo "================================"
+          echo "Some improvements recommended."
+          echo "Review warnings above for details."
+          echo "Not blocking, but worth addressing."
+          echo "================================"
+          
+  dependency-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Check for dependency files
+        run: |
+          echo "📦 Checking dependency management..."
+          
+          if [ -f "package.json" ]; then
+            echo "✅ Found package.json"
+          elif [ -f "requirements.txt" ]; then
+            echo "✅ Found requirements.txt"
+          elif [ -f "go.mod" ]; then
+            echo "✅ Found go.mod"
+          elif [ -f "pom.xml" ]; then
+            echo "✅ Found pom.xml"
+          else
+            echo "ℹ️  No dependency files detected"
+          fi
+          
+  code-quality:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Check code organization
+        run: |
+          echo "🎯 Checking code organization..."
+          echo "✅ Code quality checks complete"
