@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 BlackRoad Community Discussion
+    url: https://github.com/orgs/BlackRoad-Studio/discussions
+    about: Join the broader BlackRoad Studio community discussion
+  - name: 📚 Documentation
+    url: https://github.com/BlackRoad-Studio/studio-core
+    about: Read the documentation and guides
+  - name: 🔒 Security Issues
+    url: https://github.com/BlackRoad-Studio/studio-core/security
+    about: Report security vulnerabilities privately
