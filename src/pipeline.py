@@ -62,7 +62,7 @@ def export_tokens(output: Path) -> None:
     for name, value in BRAND.items():
         if not name == "gradient":
             css += f"  --{name}: {value};\n"
-    css += f"  --gradient-brand: {BRAND[gradient]};\n"
+    css += f"  --gradient-brand: {BRAND['gradient']};\n"
 
     # Spacing (golden ratio φ = 1.618)
     phi = 1.618
