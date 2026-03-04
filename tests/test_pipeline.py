@@ -1,11 +1,7 @@
 """Tests for BlackRoad Studio asset pipeline."""
 import json
-import sys
 import tempfile
 from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
 from pipeline import AssetSpec, render_svg, export_tokens, BRAND
 
 
