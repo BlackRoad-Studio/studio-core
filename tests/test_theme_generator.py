@@ -1,10 +1,5 @@
 """Tests for BlackRoad Studio theme generator."""
 import json
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
 from theme_generator import to_css, to_tailwind, to_json, COLORS, GRADIENTS, SPACING
 
 
