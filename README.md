@@ -1,5 +1,13 @@
 # studio-core
 
+> Core studio tools and frameworks
+
+Part of the [BlackRoad OS](https://blackroad.io) ecosystem — [BlackRoad-Studio](https://github.com/BlackRoad-Studio)
+
+---
+
+# studio-core
+
 Core studio tools and frameworks
 
 **BlackRoad-Studio** — Creative — video, canvas, design
